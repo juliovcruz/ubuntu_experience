@@ -1,4 +1,9 @@
 # Ubuntu Experience
+
+1º - Baixar "ubuntuReinstall.sh"
+2º - Rodar script no terminal
+3º - Esperar
+
 # Tema Dracula no Terminal
 
 ## Instalar o Terminal zsh
