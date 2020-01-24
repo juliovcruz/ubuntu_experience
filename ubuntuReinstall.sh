@@ -33,7 +33,6 @@ PROGRAMAS_SNAP=(
     insomnia
 )
 
-## Atualizando o repositório ##
 sudo apt update -y
 
 ## Adicionando repositórios ##
@@ -41,12 +40,13 @@ sudo apt update -y
 sudo apt-add-repository "$PPA_GRAPHICS_DRIVERS" -y
 sudo add-apt-repository ppa:papirus/papirus
 
+## -----
+
 sudo apt-get install curl
 curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
-## Atualizando o repositório ##
 sudo apt update -y
 
 ## Download e instalaçao de programas externos ##
@@ -54,7 +54,7 @@ mkdir "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_GOOGLE_CHROME"       -P "$DIRETORIO_DOWNLOADS"
 wget -c "$URL_GITKRAKEN"       -P "$DIRETORIO_DOWNLOADS"
 
-## Instalando pacotes .deb baixados na sessão anterior ##
+## Instalando pacotes .deb dos programas externos##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
 
 # Instalar programas no apt
@@ -86,15 +86,15 @@ done
 gsettings set org.gnome.settings-daemon.plugins.media-keys screenshot ''
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "`gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings | sed -e"s>'\]>','/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']>"| sed -e"s>@as \[\]>['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']>"`"
 
+#ADICIONA FLAMESHOT NA PRINTSCREEN
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'FlameShot'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/usr/bin/flameshot gui'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding 'Print'
 
-# ----------------------------- PÓS-INSTALAÇÃO ----------------------------- #
-## Finalização, atualização e limpeza##
+
 sudo apt update && sudo apt dist-upgrade -y
 sudo apt autoclean
 sudo apt autoremove -y
-# ---------------------------------------------------------------------- #
 
-echo "INSTALAÇÃO COMPLETA"
+
+echo "INSTALACAO COMPLETA -- Colocar Thema de Icones: Papirus-Dark"
