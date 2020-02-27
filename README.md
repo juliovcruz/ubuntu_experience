@@ -2,16 +2,18 @@
 
 1º - Baixar "ubuntuReinstall.sh"
 
-2º - Rodar script no terminal
+2º - chmod +x ubuntuReinstall.sh
 
-3º - Esperar
+3º - Rodar script no terminal
+
+4º - Esperar
 
 # Tema Dracula no Terminal
 
 ## Instalar o Terminal zsh
 
     sudo apt install zsh
-    $ sh -c "$(curl -fsSL [https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh](https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh))"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   Para torná-lo padrão:
   
     chsh -s $(which zsh)
@@ -20,9 +22,11 @@ Necessário reiniciar o sistema para manter a alteração.
 
 ## Font FiraCode
 
-    sudo apd-apt-repository universe
+    sudo add-apt-repository universe
     sudo apt install fonts-firacode
+
 Colocar a fonte nas preferências do terminal.
+
 ## Instalar as Cores do Dracula
 
     sudo apt-get install dconf-cli
@@ -32,8 +36,8 @@ Colocar a fonte nas preferências do terminal.
 
 ## Instalar o tema Spaceship
 
-    git clone [https://github.com/denysdovhan/spaceship-prompt.git](https://github.com/denysdovhan/spaceship-prompt.git) "$ZSH_CUSTOM/themes/spaceship-prompt"
-    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+    npm install -g spaceship-prompt
+
 Dentro de *"~/.zshrc"*, alterar *"ZSH_THEME"* para *"spaceship"*
 
 Depois reinicie o terminal.
@@ -41,7 +45,7 @@ Depois reinicie o terminal.
 ## Plugins
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-Copiar o ./zshrc do repositório ou ...
+
 Adicionar no final de *"~./zshrc"*:
 
     zinit light zdharma/fast-syntax-highlighting
