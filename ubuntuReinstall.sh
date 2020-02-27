@@ -3,8 +3,6 @@
 PPA_GRAPHICS_DRIVERS="ppa:graphics-drivers/ppa"
 
 URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-URL_GITKRAKEN="https://release.gitkraken.com/linux/gitkraken-amd64.deb
-sudo dpkg -i gitkraken-amd64.deb"
 
 DIRETORIO_DOWNLOADS="$HOME/Downloads/programas"
 
@@ -13,7 +11,7 @@ PROGRAMAS_APT=(
   flameshot
   papirus-icon-theme
   papirus-folders
-  gnome-tweak
+  gnome-tweaks
   filezilla
   putty
   default-jre  
@@ -23,12 +21,13 @@ PROGRAMAS_APT=(
   git
   yarn
   nodejs
+  zsh
+  dconf-cli
 )
 
 PROGRAMAS_SNAP=(
     spotify
     code
-    notepad-plus-plus
     eclipse
     insomnia
 )
@@ -51,8 +50,10 @@ sudo apt update -y
 
 ## Download e instalaçao de programas externos ##
 mkdir "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_GOOGLE_CHROME"       -P "$DIRETORIO_DOWNLOADS"
-wget -c "$URL_GITKRAKEN"       -P "$DIRETORIO_DOWNLOADS"
+
+if ! google-chrome --version; then
+    wget -c "$URL_GOOGLE_CHROME"       -P "$DIRETORIO_DOWNLOADS"
+fi
 
 ## Instalando pacotes .deb dos programas externos##
 sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
@@ -60,9 +61,10 @@ sudo dpkg -i $DIRETORIO_DOWNLOADS/*.deb
 # Instalar programas no apt
 for nome_do_programa in ${PROGRAMAS_APT[@]}; do
   if ! dpkg -l | grep -q $nome_do_programa; then 
-    apt-get install "$nome_do_programa" -y
+    echo "[INSTALANDO] - $nome_do_programa"
+    sudo apt-get install "$nome_do_programa" -y
   else
-    echo "[INSTALADO] - $nome_do_programa"
+    echo "[JA INSTALADO] - $nome_do_programa"
   fi
 done
 
@@ -74,7 +76,9 @@ papirus-folders -C red --theme Papirus-Dark
 
 for nome_do_programa in ${PROGRAMAS_SNAP[@]}; do
   if ! dpkg -l | grep -q $nome_do_programa; then 
-    snap install "$nome_do_programa"
+    echo "[JA INSTALADO] - $nome_do_programa"
+    sudo snap install "$nome_do_programa"
+    sudo snap install "$nome_do_programa" --classic
   else
     echo "[INSTALADO] - $nome_do_programa"
   fi
@@ -91,10 +95,22 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command '/usr/bin/flameshot gui'
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding 'Print'
 
-
 sudo apt update && sudo apt dist-upgrade -y
 sudo apt autoclean
 sudo apt autoremove -y
 
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
+gsettings set org.gnome.desktop.interface cursor-theme "DMZ-White"
 
-echo "INSTALACAO COMPLETA -- Colocar Thema de Icones: Papirus-Dark"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+chsh -s $(which zsh)
+
+git clone https://github.com/dracula/gnome-terminal
+cd gnome-terminal
+./install.sh
+
+echo "INSTALACAO COMPLETA"
+
+cd ..
+code AFTER.md
