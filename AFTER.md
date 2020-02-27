@@ -60,7 +60,6 @@ Adicionar no settings.json do VSCode:
 
 ## SETTINGS VSCODE
 
-{
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
     "workbench.colorTheme": "Dracula",
@@ -68,5 +67,4 @@ Adicionar no settings.json do VSCode:
     "window.doubleClickIconToClose": true,
     "window.titleBarStyle": "custom",
     "terminal.integrated.shell.osx": "/bin/zsh"
-}
 
