@@ -68,3 +68,9 @@ Adicionar no settings.json do VSCode:
     "window.titleBarStyle": "custom",
     "terminal.integrated.shell.osx": "/bin/zsh"
 
+## FLAMESHOT
+
+Adicionar hotkey:
+
+comando: flameshot gui
+alterar tecla de print screen
